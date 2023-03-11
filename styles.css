@@ -94,6 +94,7 @@ body.wrong {
     color: var(--button-text-color-correct);
 }
 
+
 .btn.wrong {
     --hue: var(--hue-wrong);
     color: var(--button-text-color-wrong);

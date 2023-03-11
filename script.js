@@ -25,10 +25,10 @@ const STATE = {
 
 const questions = generateQuestions(
   (count = 10),
-  (a_start = 10),
+  (a_start = 1),
   (a_end = 20),
-  (b_start = 10),
-  (b_end = 20)
+  (b_start = 11),
+  (b_end = 13)
 );
 
 let state = STATE.Intro;
@@ -212,7 +212,7 @@ function getAnswers(correctAnswer) {
   const answers = [correctAnswer];
   while (answers.length < 4) {
     console.log(answers)
-    const randomAnswer = Math.floor(Math.random() * 10) + correctAnswer;
+    const randomAnswer = Math.floor((Math.random()-0.5) * 5) * 10 + correctAnswer;
     if (!answers.includes(randomAnswer)){
       answers.push(randomAnswer)
       answersObjects.push({
