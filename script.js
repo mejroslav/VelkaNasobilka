@@ -111,6 +111,7 @@ function selectAnswer(e) {
 
 function displayFinalResults() {
   finalContainerElement.classList.remove("hide");
+  questionContainerElement.classList.add("hide");
   state = STATE.Finished;
   let finalText = "";
 
@@ -121,7 +122,7 @@ function displayFinalResults() {
       break;
     case 1:
       finalText =
-        "Pouze jednu otázku jsi zodpověděl správně! Měl bys uvažovat o návratu do školy!";
+        "Pouze jednu otázku jsi zodpověděl správně!";
       break;
     default:
       finalText =
