@@ -41,8 +41,8 @@ let correctAnsweredQuestions;
 let wrongAnsweredQuestions;
 
 // Event Listeners
-startButton.addEventListener("pointerdown", startGame);
-nextButton.addEventListener("pointerdown", () => {
+startButton.addEventListener("pointerup", startGame);
+nextButton.addEventListener("pointerup", () => {
   setNextQuestion();
 });
 
@@ -169,7 +169,7 @@ function showQuestion(question) {
     if (answer.correct) {
       button.dataset.correct = answer.correct;
     }
-    button.addEventListener("pointerdown", selectAnswer); // TODO: zatím lze na tlačítka klikat neomezeně, někam přidat removeEventListener?
+    button.addEventListener("pointerup", selectAnswer); // TODO: zatím lze na tlačítka klikat neomezeně, někam přidat removeEventListener?
 
     answerButtonsElement.appendChild(button);
   });
