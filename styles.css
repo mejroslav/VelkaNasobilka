@@ -46,19 +46,20 @@ body.wrong {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 90%;
+    max-height: 90vh;
+    max-width: 90vw;
     background-color: var(--background-color);
     border-radius: 5px;
     padding: 10px 5vh;
     box-shadow: 0 0 10px 1px;
 }
 
-#intro-container{
+.intro-container{
     display: flex;
     justify-content: flex-start;
 }
 
-#intro-container p{
+.intro-container p{
     text-align: justify;
 }
 
@@ -114,6 +115,7 @@ body.wrong {
 }
 
 .question-text {
+    padding-top: 10px;
     font-weight: bold;
 }
 
