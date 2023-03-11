@@ -23,6 +23,9 @@ const STATE = {
   Finished: 3,
 };
 
+const questions = generateQuestions(count=10, a_start=10, a_end=20, b_start=10, b_end=20)
+
+
 let state = STATE.Intro;
 
 let shuffledQuestions;
@@ -166,7 +169,6 @@ function showQuestion(question) {
   });
 }
 
-const questions = generateQuestions(count=10, a_start=10, a_end=20, b_start=10, b_end=20)
 
 function generateQuestions(count, a_start, a_end, b_start, b_end) {
   const questions = [];
@@ -176,18 +178,20 @@ function generateQuestions(count, a_start, a_end, b_start, b_end) {
     const b = Math.floor(Math.random() * (b_end - b_start + 1)) + b_start;
     const correctAnswer = a * b;
     
-    const answers = [
-      { text: correctAnswer, correct: true },
-      { text: correctAnswer + Math.floor(Math.random()*10), correct: false },
-      { text: correctAnswer + Math.floor(Math.random()*10), correct: false },
-      { text: correctAnswer + Math.floor(Math.random()*10), correct: false }
-    ];
+    // const answers = [
+    //   { text: correctAnswer, correct: true },
+    //   { text: correctAnswer + Math.floor(Math.random()*10), correct: false },
+    //   { text: correctAnswer + Math.floor(Math.random()*10), correct: false },
+    //   { text: correctAnswer + Math.floor(Math.random()*10), correct: false }
+    // ];
     
-    // // Shuffle the answers
-    // for (let i = answers.length - 1; i > 0; i--) {
-    //   const j = Math.floor(Math.random() * (i + 1));
-    //   [answers[i], answers[j]] = [answers[j], answers[i]];
-    // }
+    const answers = getAnswers(correctAnswer);
+
+    // Shuffle the answers
+    for (let i = answers.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [answers[i], answers[j]] = [answers[j], answers[i]];
+    }
 
     questions.push({
       question: `Kolik je ${a} x ${b}?`,
@@ -196,4 +200,24 @@ function generateQuestions(count, a_start, a_end, b_start, b_end) {
   }
 
   return questions;
+}
+
+function getAnswers(correctAnswer){
+  const answers = [ {"text" : correctAnswer, "correct": true }]
+  for (let i = 0; i<3; i++){
+    while(true) {
+      const randomAnswer = Math.floor(Math.random() * 10) + correctAnswer
+      if (
+        answers.includes({"text": randomAnswer, "correct": true}) 
+      || answers.includes({"text": randomAnswer, "correct": false}) 
+      ) continue;
+      answers.push({
+        "text": randomAnswer,
+        "correct": false
+      })
+      break;
+    }
+
+  }
+  return answers
 }
