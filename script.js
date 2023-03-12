@@ -28,7 +28,7 @@ const questions = generateQuestions(
   (a_start = 1),
   (a_end = 20),
   (b_start = 11),
-  (b_end = 14)
+  (b_end = 16)
 );
 
 let state = STATE.Intro;
