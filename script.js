@@ -24,11 +24,11 @@ const STATE = {
 };
 
 const questions = generateQuestions(
-  (count = 10),
-  (a_start = 1),
+  (count = 20),
+  (a_start = 3),
   (a_end = 20),
   (b_start = 11),
-  (b_end = 16)
+  (b_end = 17)
 );
 
 let state = STATE.Intro;
@@ -177,32 +177,34 @@ function showQuestion(question) {
 
 function generateQuestions(count, a_start, a_end, b_start, b_end) {
   const questions = [];
-
+  const listOfAnswers = [];
+  let correctAnswer = null;
+  let a, b;
   for (let i = 0; i < count; i++) {
-    const a = Math.floor(Math.random() * (a_end - a_start + 1)) + a_start;
-    const b = Math.floor(Math.random() * (b_end - b_start + 1)) + b_start;
-    const correctAnswer = a * b;
+    while (true) {
+      a = Math.floor(Math.random() * (a_end - a_start + 1)) + a_start;
+      b = Math.floor(Math.random() * (b_end - b_start + 1)) + b_start;
+      correctAnswer = a * b;
+      if (!listOfAnswers.includes(correctAnswer)){
+        listOfAnswers.push(correctAnswer)
+        break
+      }
+    }
 
-    // const answers = [
-    //   { text: correctAnswer, correct: true },
-    //   { text: correctAnswer + Math.floor(Math.random()*10), correct: false },
-    //   { text: correctAnswer + Math.floor(Math.random()*10), correct: false },
-    //   { text: correctAnswer + Math.floor(Math.random()*10), correct: false }
-    // ];
-
-    const answers = getAnswers(correctAnswer);
+    const randomAnswers = getAnswers(correctAnswer);
 
     // Shuffle the answers
-    for (let i = answers.length - 1; i > 0; i--) {
+    for (let i = randomAnswers.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [answers[i], answers[j]] = [answers[j], answers[i]];
+      [randomAnswers[i], randomAnswers[j]] = [randomAnswers[j], randomAnswers[i]];
     }
 
     questions.push({
       question: `Kolik je ${a} x ${b}?`,
-      answers: answers,
+      answers: randomAnswers,
     });
   }
+  console.log(questions)
 
   return questions;
 }
@@ -211,7 +213,6 @@ function getAnswers(correctAnswer) {
   const answersObjects = [{ text: correctAnswer, correct: true }];
   const answers = [correctAnswer];
   while (answers.length < 4) {
-    console.log(answers)
     const randomAnswer = Math.floor((Math.random()-0.5) * 5) * 10 + correctAnswer;
     if (!answers.includes(randomAnswer)){
       answers.push(randomAnswer)
@@ -219,7 +220,7 @@ function getAnswers(correctAnswer) {
         text: randomAnswer,
         correct: false,
       })
-    } else {console.log(`${randomAnswer} already in answers`)};
+    }
   }
 
   return answersObjects;
