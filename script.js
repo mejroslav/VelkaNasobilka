@@ -212,8 +212,8 @@ function generateQuestions(count, a_start, a_end, b_start, b_end) {
 function getAnswers(correctAnswer) {
   const answersObjects = [{ text: correctAnswer, correct: true }];
   const answers = [correctAnswer];
-  while (answers.length < 4) {
-    const randomAnswer = Math.floor((Math.random()-0.5) * 5) * 10 + correctAnswer;
+  while (answers.length < 6) {
+    const randomAnswer = Math.floor((Math.random()-0.5) * 20) + correctAnswer;
     if (!answers.includes(randomAnswer)){
       answers.push(randomAnswer)
       answersObjects.push({
